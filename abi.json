@@ -1,0 +1,216 @@
+[
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalComprobados",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "k",
+				"type": "address"
+			}
+		],
+		"name": "newVotante",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "total",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "key",
+				"type": "address"
+			}
+		],
+		"name": "getP",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "o",
+				"type": "uint256"
+			},
+			{
+				"name": "p",
+				"type": "uint256"
+			}
+		],
+		"name": "validarKey",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "l",
+				"type": "address"
+			}
+		],
+		"name": "comprobar",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "ok",
+				"type": "address"
+			},
+			{
+				"name": "llave",
+				"type": "address"
+			}
+		],
+		"name": "votar",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "p",
+				"type": "address"
+			}
+		],
+		"name": "insertComprobados",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cantidadVotantes",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "n1",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "p1",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "n2",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "p2",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "nc",
+				"type": "address"
+			}
+		],
+		"name": "tiempo",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "nuevoVotante",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "votosRealizados",
+		"type": "event"
+	}
+]

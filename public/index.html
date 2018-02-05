@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Votacion</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/voto.css">
+
+	
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="js/web3.min.js"></script>
+<script type="text/javascript" >
+
+	var event =new EventSource("http://localhost:3500/evn");
+   event.addEventListener("ola",function(e){
+   	console.log(e);
+   	toastr["info"]("Nuevo Voto Realisado");
+   })
+var abi=[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "o",
+				"type": "uint256"
+			},
+			{
+				"name": "p",
+				"type": "uint256"
+			}
+		],
+		"name": "validarKey",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalComprobados",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "total",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "l",
+				"type": "address"
+			}
+		],
+		"name": "comprobar",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "key",
+				"type": "address"
+			}
+		],
+		"name": "getP",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "nuevoVotante",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cantidadVotantes",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "votosRealizados",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "n1",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "p1",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "n2",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "p2",
+				"type": "uint256"
+			}
+		],
+		"name": "tiempo",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "ok",
+				"type": "address"
+			},
+			{
+				"name": "llave",
+				"type": "address"
+			}
+		],
+		"name": "votar",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "p",
+				"type": "address"
+			}
+		],
+		"name": "insertComprobados",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "k",
+				"type": "address"
+			}
+		],
+		"name": "newVotante",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];	
+    
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        
+           if(!web3.isConnected()) {
+                console.error("Not connectedd");
+
+            }
+
+
+      web3.eth.defaultAccount = web3.eth.accounts[0];
+   console.log(web3.eth.accounts);
+       var Contract = web3.eth.contract(abi);
+
+    var C = Contract.at('0x08c0acc71691dd5c9883bdb9a617fd772c47cd0b');
+    
+    setTimeout(function(){
+    	  C.votar("0xbd43b83f915d8d4e007e40961a418233ff23b4ee","0xd1dbAe00541564cd6cEEC9992e06EcBBc87605eB",(e,y)=>{
+  	 console.log(e,y);})
+    },2000)
+    C.tiempo(function(err,data){
+    console.log(data,899);
+    })
+
+
+
+</script>
+
+</head>
+<body>
+
+	<div class="b">
+		<div><p>Conteo de Votos</p></div><br>
+		<div>
+			<span>Candidato X :</span>
+			<strong><span class="uno">0</span></strong>
+		</div>
+		<div>
+			<span>Candidato Y :</span>
+			<strong><span class="dos">0</span></strong>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="primer">
+		<br><br><br><br>
+		<center>
+			
+		<div class="imgVoto"><img src="imagen/voto.png" width="70px" heigth="50px"></div>	
+		<br><br><br>
+        <div>
+			<h2>Votacion Privado</h2>
+		</div>    
+
+		<input type="text" placeholder="Insert Address" name="" class="iptKey">
+		<input type="file" name=""><br>
+		
+	   <input type="button" id="enviar" value ="Comprobar" name=""><br>
+	
+	 
+<br>
+	   <span class="msg efecto"></span>	</center>
+      </div>
+
+
+    <div class="segundo">
+      <center>
+      	<h2 style="color:black">Eligir Votante</h2>
+      	<br>
+      	<div class="votante">
+      		<h4>Candidato X</h4>
+      		<div><img src="imagen/can2.jpg" width="190px" height="200px"></div>
+      		<label>0x2c50E3380C8D1B653cfE271139B2f1d57d1DDFa9</label><br><br>
+      		<input type="checkbox" class="elegir" data-a="0x2c50E3380C8D1B653cfE271139B2f1d57d1DDFa9" name="vehicle" value="y">
+      	</div>
+      	<div class="votante">
+      		<h4>Candidato Y</h4>
+      		<div><img src="imagen/can1.jpg" width="190px" height="200px"></div>
+      		<label>0xd1dbAe00541564cd6cEEC9992e06EcBBc87605eB</label><br><br>
+      		<input type="checkbox" data-a="0xd1dbAe00541564cd6cEEC9992e06EcBBc87605eB" class="elegir" name="vehicle" value="x">
+      	</div><br><br>
+      	<input type="button" id="votar"  value ="Votar" name="">	</<br></center>
+      </div>
+
+<div class="tercero" style="display: none" >
+	<center><br><br><br>
+		<img src="imagen/completado.png" width="190" height="200"><br>
+		<span class="efecto" style="color: white">Ah votado correctamente</span>
+			</center>
+</div>
+
+	   </div>
+
+
+
+</body>
+<script src="js/custom-file-input.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>

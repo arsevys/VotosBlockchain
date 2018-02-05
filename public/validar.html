@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Votacion</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/voto.css">
+
+	
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<script type="text/javascript" >
+
+	
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        
+           if(!web3.isConnected()) {
+                console.error("Not connectedd");
+
+            }
+
+
+      web3.eth.defaultAccount = web3.eth.accounts[0];
+   console.log(web3.eth.accounts);
+       var Contract = web3.eth.contract(abi);
+
+    var C = Contract.at('0x08c0acc71691dd5c9883bdb9a617fd772c47cd0b');
+    
+    setTimeout(function(){
+    	  C.votar("0xbd43b83f915d8d4e007e40961a418233ff23b4ee","0xd1dbAe00541564cd6cEEC9992e06EcBBc87605eB",(e,y)=>{
+  	 console.log(e,y);})
+    },2000)
+    C.tiempo(function(err,data){
+    console.log(data,899);
+    })
+
+
+
+</script>
+
+<style type="text/css">
+	.container {
+		width:30%;
+		padding: 15px;
+	}
+	h2 {
+		color: black;
+
+	}
+	label {
+		background-color: white;
+	}
+</style>
+
+</head>
+<body >
+
+	<div class="b" >
+		<div><p>Conteo de Votos</p></div><br>
+		<div>
+			<span>Candidato X :</span>
+			<strong><span class="uno">0</span></strong>
+		</div>
+		<div>
+			<span>Candidato Y :</span>
+			<strong><span class="dos">0</span></strong>
+		</div>
+	</div>
+
+	<div class="container" style="background-color: white;">
+     <h2>Validar Usuario</h2>
+  <form action="/action_page.php">
+  	     <div class="form-group">
+      <label >Nombre:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" name="text">
+    </div>
+    <div class="form-group">
+
+      <label >Apellidos:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" name="text">
+    </div>
+        <div class="form-group">
+      <label >DNI:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" name="text">
+    </div>
+   
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+	   </div>
+
+
+
+</body>
+<script src="js/custom-file-input.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>
