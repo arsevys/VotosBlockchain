@@ -1,4 +1,11 @@
 $(function(){
+  if (typeof web3 == 'undefined'){
+$(".meta").css({"display":"block"});
+$(".container").css({"background":"rgba(0,0,0,0.5)"});
+        $(" .primer").css({"display":"none"});
+  }else {
+     $(".meta").css({"display":"none"});
+  }
 var addr;
 toastr.options = {
   "closeButton": false,
@@ -19,17 +26,30 @@ toastr.options = {
 }
 
 toastr["info"]("Para Votar Usted Debera Contar Con su Address");
- toastr["success"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
- toastr["success"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
- toastr["success"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
-
+ 
 setInterval(function(){
-  toastr["success"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
+  toastr["info"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
 
-},15000)
+},35000)
 
+
+console.log(C);
 $("#enviar").click(()=>{
   console.log($(".iptKey").val());
+  C.comprobar($(".iptKey").val(),function(err,data){
+    console.log(data,899);
+    if(data[0]){
+      $(".primer").css({"display":"none"});
+      $(".container").css({"background":"#F0F0F0"});
+      $(".segundo").css({"display":"block"});
+    }
+    else {
+
+    toastr["warning"](data[1])
+    $(".msg").html("<a href='/validar.html' target='_blank'>Afiliar Voto</a>")
+    }
+})
+  /*
   $.ajax({
     url:"/validar",
     type:"POST",
@@ -49,10 +69,10 @@ $("#enviar").click(()=>{
       console.log(addr);
     }
     }
-  })
+  })*/
 
 })
-
+/*
   $.ajax({
     url:"/result",
     type:"POST",
@@ -63,9 +83,24 @@ $("#enviar").click(()=>{
     }
   })
 
-
+*/
 $("#votar").click(()=>{
- 
+
+  C.votar(obten(),(e,d)=>{
+ console.log(e,d);
+
+
+ if(d){
+
+    $(".primer").css({"display":"none"});
+      $(".segundo").css({"display":"none"});
+      $(".tercero").css({"display":"block"});
+      $(".container").css({"background":"purple"});
+      $(".fr").attr("href","https://rinkeby.etherscan.io/tx/"+d);
+ }
+
+  })
+ /*
   $.ajax({
     url:"/votar",
     type:"POST",
@@ -87,7 +122,7 @@ $("#votar").click(()=>{
     }
     }
   })
-
+*/
 })
 
 $(".elegir").click(function(){

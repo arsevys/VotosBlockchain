@@ -32,12 +32,14 @@ app.post("/validar",(req,res)=>{
 
  console.log(req.body);
 
- C.comprobar(req.body.adreess,(c,n)=>{
-	console.log(5,c)
-	res.status(200).send({x:n})
-  })
+// C.validarUsuario(req.body.adreess,(c,n)=>{
+// 	console.log(5,c)
+// 	res.status(200).send({x:n})
+//   })
 
 })
+
+
 
 
 app.post("/result",(req,res)=>{

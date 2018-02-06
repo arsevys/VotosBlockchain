@@ -21,38 +21,267 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <script type="text/javascript" >
-
+var abi=[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "k",
+				"type": "address"
+			}
+		],
+		"name": "viewVotante",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "total",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "key",
+				"type": "address"
+			}
+		],
+		"name": "getP",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "l",
+				"type": "address"
+			}
+		],
+		"name": "comprobar",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cantidadVotantes",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "nom",
+				"type": "string"
+			},
+			{
+				"name": "ape",
+				"type": "string"
+			},
+			{
+				"name": "dni",
+				"type": "string"
+			},
+			{
+				"name": "ad",
+				"type": "address"
+			}
+		],
+		"name": "insertUsuario",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "realisado",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "n1",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "p1",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "n2",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "p2",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "nc",
+				"type": "address"
+			}
+		],
+		"name": "tiempo",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "llave",
+				"type": "address"
+			}
+		],
+		"name": "votar",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "votosRealizados",
+		"type": "event"
+	}
+]
+var web3;
 	
-            // set the provider you want from Web3.providers
+           if (typeof web3 != 'undefined') { 
+         console.log ("Uso de web3 detectado desde una fuente externa como Metamask") 
+       web3 = new Web3 (web3.currentProvider) ;
+      }
+      else {// set the provider you want from Web3.providers
             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-        
+        }
            if(!web3.isConnected()) {
                 console.error("Not connectedd");
 
             }
+
+        
 
 
       web3.eth.defaultAccount = web3.eth.accounts[0];
    console.log(web3.eth.accounts);
        var Contract = web3.eth.contract(abi);
 
-    var C = Contract.at('0x08c0acc71691dd5c9883bdb9a617fd772c47cd0b');
-    
-    setTimeout(function(){
-    	  C.votar("0xbd43b83f915d8d4e007e40961a418233ff23b4ee","0xd1dbAe00541564cd6cEEC9992e06EcBBc87605eB",(e,y)=>{
-  	 console.log(e,y);})
-    },2000)
-    C.tiempo(function(err,data){
-    console.log(data,899);
-    })
+    var C = Contract.at('0x6d0e7883e04c85c8774052e23b53970e618e8a2e');
+    console.log(C);
+    C.realisado((g,c)=>{
+    	console.log(g,c.args);
+    	console.log(g,c.args[""]);
+    	toastr["success"]("Solicitud validado correctamente para ",c.args[""]);
+    });
+ 
+  C.tiempo((e,x)=>{
+ console.log(e,x);
+ 	$(".uno").text(x.args.p1.c[0]);
+      $(".dos").text(x.args.p2.c[0]);
 
-
-
+      toastr["success"]("Voto realisado por "+ x.args.nc)
+   })
+   C.total((a,b)=>{
+   	console.log(a,b[1].c[0]);
+   	$(".uno").text(b[1].c[0])
+      $(".dos").text(b[3].c[0])
+   })
 </script>
 
 <style type="text/css">
 	.container {
-		width:30%;
+		margin-top: 5px;
+		width:38%;
+		height: auto;
 		padding: 15px;
 	}
 	h2 {
@@ -79,31 +308,54 @@
 		</div>
 	</div>
 
-	<div class="container" style="background-color: white;">
+  <div class="segun container"  style="background-color: white;display: none">
+  	<center>
+  		<img src="imagen\bien.png" width="100" height="100"><br>
+  		<span>Se realiso correctamente en breves momentos validaremos tus datos enviados</span><br>
+  		<a class="ver" href="#" target="_blank">Ver Transaccion</a>
+  	</center>
+  </div>	
+
+	<div class="container df" style="background-color: white; ">
      <h2>Validar Usuario</h2>
-  <form action="/action_page.php">
+ 
   	     <div class="form-group">
       <label >Nombre:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter email" name="text">
+      <input type="text" class="form-control" id="nombre" placeholder="Introduce tu Nombre" name="text">
     </div>
     <div class="form-group">
 
       <label >Apellidos:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter email" name="text">
+      <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" name="text">
     </div>
         <div class="form-group">
       <label >DNI:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter email" name="text">
+      <input type="text" class="form-control" id="dni" placeholder="Introduce tu DNI" name="text">
     </div>
    
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+   <div class="form-group">
+      <label >Foto DNI Delantera:</label><br>
+    <label class="custom-file">
+  <input type="file" id="file" class="custom-file-input">
+  <span class="custom-file-control"></span>
+</label>
     </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+   
+   <div class="form-group">
+      <label >Selfie con su DNI:</label><br>
+      <label class="custom-file">
+  <input type="file" id="file" class="custom-file-input">
+  <span class="custom-file-control"></span>
+</label>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+   
+     <div class="form-group">
+      <label >LLave pública\Address:</label>
+      <input type="text" class="form-control" id="address" placeholder="Address" name="text">
+    </div>
+   
+ <center>
+    <button onclick="validar()" class="btn btn-default">Enviar</button></center>
 
 	   </div>
 
@@ -112,4 +364,29 @@
 </body>
 <script src="js/custom-file-input.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+	
+	function validar(){
+		C.insertUsuario($("#nombre").val(),$("#apellidos").val(),$("#dni").val(),$("#address").val(),(e,y)=>{
+        console.log(e,y);
+        $(".df").css({"display":"none"});
+        $(".segun").css({"display":"block"});
+        $(".ver").attr("href","https://rinkeby.etherscan.io/tx/"+y);
+		})
+
+		$.ajax({
+			url:"/validar",
+			type:"POST",
+			data:{
+				nombre:$("#nombre").val(),
+				apellidos:$("#apellidos").val(),
+				dni:$("#dni").val(),
+				address:$("#address").val()
+			},
+			success:function(e){
+            console.log(e);
+			}
+		})
+	}
+</script>
 </html>
