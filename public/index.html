@@ -18,11 +18,7 @@
 <script src="js/web3.min.js"></script>
 <script type="text/javascript" >
 
-	var event =new EventSource("http://localhost:3500/evn");
-   event.addEventListener("ola",function(e){
-   	console.log(e);
-   	toastr["info"]("Nuevo Voto Realisado");
-   })
+	
 var abi=[
 	{
 		"constant": true,
@@ -240,11 +236,19 @@ var abi=[
          console.log ("Uso de web3 detectado desde una fuente externa como Metamask") ;
 
        web3 = new Web3 (web3.currentProvider) 
+       web3.version.getNetwork((err,id)=>{
+  console.log(id);
+    if(id!=4){
+    	$(".rink").css({"display":"block"});
+    }else{
+    	$(".primer").css({"display":"block"});
+    }
+  }) 
       }
       else {// set the provider you want from Web3.providers
       	console.log("Se Requiere que utiize metamask");
       	$(".meta").css({"display":"block"});
-      	$(" .primer").css({"display":"none"});
+     
             /*web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));*/
         }
 
@@ -252,13 +256,13 @@ var abi=[
                 console.error("Not connectedd");
 
             }
-
-  
-
-   console.log(web3.eth.accounts);
+ 
+web3.eth.getTransactionReceipt("0xfe8f789298030db9e53dee07332903434d0f7b4529607e3992f14cb5eb6b5dfc",(e,b)=>{
+ console.log(e,b)
+});
        var Contract = web3.eth.contract(abi);
 
-    var C = Contract.at('0x6d0e7883e04c85c8774052e23b53970e618e8a2e');
+    var C = Contract.at('0x66ac14c4f9959e75597fd96767a2f9811c969dc5');
     
    C.tiempo((e,x)=>{
  console.log(e,x);
@@ -274,6 +278,11 @@ var abi=[
    	$(".uno").text(b[1].c[0])
       $(".dos").text(b[3].c[0])
    })
+ 
+  
+
+  
+
 
     C.realisado((g,c)=>{
     	console.log(g,c.args);
@@ -313,6 +322,16 @@ var abi=[
 			</center>
 			
 		</div>
+		
+		<div class="rink" >
+			<center>
+				
+				<br>
+				<img src="imagen/rink.png" style="width: 97%" height="400">
+			</center>
+			
+		</div>
+
 		<div class="primer">
 		<br><br><br><br>
 		<center>
@@ -320,7 +339,7 @@ var abi=[
 		<div class="imgVoto"><img src="imagen/voto.png" width="70px" heigth="50px"></div>	
 		<br><br><br>
         <div>
-			<h2>Votacion Privado</h2>
+			<h2>Votación Privado</h2>
 		</div>    
 
 		<input type="text" placeholder="Insert Address" name="" class="iptKey">
@@ -357,7 +376,7 @@ var abi=[
 	<center><br><br><br>
 		<img src="imagen/completado.png" width="190" height="200"><br>
 		<span class="efecto" style="color: white">Ah votado correctamente</span><br><br>
-		<a class="efecto fr" href="#" target="_blank">ver Transaccion </a>
+		<a class="efecto fr" href="#" target="_blank">ver Transacción </a>
 		
 			</center>
 </div>

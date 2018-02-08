@@ -29,13 +29,13 @@ app.get("/",function(req,res){
 
 
 app.post("/validar",(req,res)=>{
-
+let y=req.body;
  console.log(req.body);
 
-// C.validarUsuario(req.body.adreess,(c,n)=>{
-// 	console.log(5,c)
-// 	res.status(200).send({x:n})
-//   })
+C.validarUsuario(req.body.adreess,(c,n)=>{
+	console.log(5,c)
+	res.status(200).send({x:n})
+  })
 
 })
 

@@ -255,12 +255,12 @@ var web3;
    console.log(web3.eth.accounts);
        var Contract = web3.eth.contract(abi);
 
-    var C = Contract.at('0x6d0e7883e04c85c8774052e23b53970e618e8a2e');
+    var C = Contract.at('0x66ac14c4f9959e75597fd96767a2f9811c969dc5');
     console.log(C);
     C.realisado((g,c)=>{
     	console.log(g,c.args);
     	console.log(g,c.args[""]);
-    	toastr["success"]("Solicitud validado correctamente para ",c.args[""]);
+    	toastr["success"]("Solicitud validado correctamente para " + c.args[""]);
     });
  
   C.tiempo((e,x)=>{
@@ -311,8 +311,8 @@ var web3;
   <div class="segun container"  style="background-color: white;display: none">
   	<center>
   		<img src="imagen\bien.png" width="100" height="100"><br>
-  		<span>Se realiso correctamente en breves momentos validaremos tus datos enviados</span><br>
-  		<a class="ver" href="#" target="_blank">Ver Transaccion</a>
+  		<span>Se realizo correctamente en breves momentos validaremos tus datos enviados</span><br>
+  		<a class="ver" href="#" target="_blank">Ver Transacción</a>
   	</center>
   </div>	
 
@@ -372,6 +372,15 @@ var web3;
         $(".df").css({"display":"none"});
         $(".segun").css({"display":"block"});
         $(".ver").attr("href","https://rinkeby.etherscan.io/tx/"+y);
+
+        setInterval(function(){
+        web3.eth.getTransactionReceipt(y,(e,b)=>{
+        	console.log(b);
+        if(b.status=="0x1"){
+        	window.location.href="/";
+        }
+        });	
+        },3000);
 		})
 
 		$.ajax({

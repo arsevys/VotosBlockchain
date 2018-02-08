@@ -1,11 +1,13 @@
 $(function(){
   if (typeof web3 == 'undefined'){
 $(".meta").css({"display":"block"});
-$(".container").css({"background":"rgba(0,0,0,0.5)"});
-        $(" .primer").css({"display":"none"});
+
+        $(".primer").css({"display":"none"});
   }else {
      $(".meta").css({"display":"none"});
   }
+
+
 var addr;
 toastr.options = {
   "closeButton": false,
@@ -40,7 +42,7 @@ $("#enviar").click(()=>{
     console.log(data,899);
     if(data[0]){
       $(".primer").css({"display":"none"});
-      $(".container").css({"background":"#F0F0F0"});
+    
       $(".segundo").css({"display":"block"});
     }
     else {
