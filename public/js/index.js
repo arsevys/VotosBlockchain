@@ -6,7 +6,17 @@ $(".meta").css({"display":"block"});
   }else {
      $(".meta").css({"display":"none"});
   }
+// var ipfs = window.IpfsApi('localhost', '5001')
+// console.log(ipfs);
+// const  Buffers=window.IpfsApi().Buffer;
+// const d={
+//   "nombre":"Andy Javier Reyes"
+// }
+// let iz=Buffers.from(JSON.stringify(d));
 
+// ipfs.add(iz,(function(e,d){
+// console.log(e,d);
+// }))
 
 var addr;
 toastr.options = {
@@ -27,12 +37,12 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-toastr["info"]("Para Votar Usted Debera Contar Con su Address");
+// toastr["info"]("Para Votar Usted Debera Contar Con su Address");
  
-setInterval(function(){
-  toastr["info"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
+// setInterval(function(){
+//   toastr["info"]("Nuevo Voto Completado por <strong style='color:white'> 0x6d29803c2AcDdC6b9B1FF44B2226FFD70817d276 </strong>");
 
-},35000)
+// },35000)
 
 
 console.log(C);

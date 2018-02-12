@@ -3,20 +3,20 @@ var bodyParser=require("body-parser");
 var path=require("path");
 var app=express();
 
-var Web3 = require('web3');
-const addressContract="0x18e8f769e67bec440c5c93ca85c3fb20e1965b4c";
-const abi=require("./abi.json")
-var web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
-web3.eth.defaultAccount = web3.eth.accounts[0];
-var Contract = web3.eth.contract(abi);
-var C = Contract.at(addressContract);
-console.log(C.tiempo)
+// var Web3 = require('web3');
+// const addressContract="0x18e8f769e67bec440c5c93ca85c3fb20e1965b4c";
+// const abi=require("./abi.json")
+// var web3 = new Web3();
+// web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+// web3.eth.defaultAccount = web3.eth.accounts[0];
+// var Contract = web3.eth.contract(abi);
+// var C = Contract.at(addressContract);
+// console.log(C.tiempo)
 
 
-C.tiempo((e,data)=>{
-console.log("dddd"+e,data);
-})
+// C.tiempo((e,data)=>{
+// console.log("dddd"+e,data);
+// })
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -32,10 +32,11 @@ app.post("/validar",(req,res)=>{
 let y=req.body;
  console.log(req.body);
 
-C.validarUsuario(req.body.adreess,(c,n)=>{
-	console.log(5,c)
-	res.status(200).send({x:n})
-  })
+// C.validarUsuario(req.body.adreess,(c,n)=>{
+// 	console.log(5,c)
+// 	res.status(200).send({x:n})
+//   })
+
 
 })
 
